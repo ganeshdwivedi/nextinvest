@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/investments/update/[id]", "src/app/api/investments/[id]", "src/app/api/getAllSubscriber"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/investments/update/[id]", "src/app/api/investments/[id]", "src/app/api/getAllSubscriber", "src/app/not-found.tsx"],
   "exclude": ["node_modules"]
 }

@@ -6,6 +6,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
+import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,16 +16,18 @@ const page = () => {
   const router = useRouter();
   const IsloggedIN = useSelector((state: RootState) => state.auth);
   const [isPasswordVisible, setIsPassWordVisible] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const {register,watch,setValue} = useForm();
+  const {email, password,isLoading}= watch();
 
   const OnSubmit = async () => {
+    setValue('isLoading',true)
     try {
       const response = await axios.post("/api/auth/login", { email, password });
       setDefaultCookie("user", JSON.stringify(response.data.data));
       dispatch(loginUser(response.data.user));
       toast.success(response.data.message);
       router.push("/investments");
+       setValue("isLoading", false);
     } catch (error: any) {
       console.log(error);
       toast.error(error.message);
@@ -43,10 +46,7 @@ const page = () => {
           <div>
             <p>Email</p>
             <input
-              value={email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setEmail(e.target.value)
-              }
+              {...register("email", { required: true })}
               className="border w-full p-2 border-gray-300"
               type="email"
               placeholder="Enter Email"
@@ -56,10 +56,7 @@ const page = () => {
             <p>Password</p>
             <div className="flex flex-row items-center gap-3 border-gray-300 border">
               <input
-                value={password}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setPassword(e.target.value)
-                }
+                {...register("password", { required: true })}
                 className="w-[90%] p-2"
                 type={isPasswordVisible ? "text" : "password"}
                 placeholder="Enter password"
@@ -79,7 +76,15 @@ const page = () => {
             Login
           </button>
           <p className="font-regular text-gray-700">
-            Don't have an account ? <Link href={'/register'} className="hover:text-primary">Register</Link>
+            Don't have an account ?{" "}
+            <Link
+              href={"/register"}
+              className={`${
+                isLoading ? "cursor-wait pointer-events-none" : ""
+              } hover:text-primary`}
+            >
+              Register
+            </Link>
           </p>
         </form>
       </div>
