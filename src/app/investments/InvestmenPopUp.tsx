@@ -7,6 +7,21 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaCamera } from "react-icons/fa6";
 
+const initialValues: investmentType = {
+  _id: undefined,
+  title: "",
+  location: "",
+  description: "",
+  security_type: "",
+  multiple_invest: 0,
+  profile_img: "",
+  min_invest: 0,
+  get_price: 0,
+  total_price: 0,
+  maturity: "",
+  tags: "",
+};
+
 const InvestmentPopUp = ({
   selectedInvest,
   isOpen,
@@ -16,10 +31,11 @@ const InvestmentPopUp = ({
   selectedInvest: any;
   isOpen: boolean;
   setISOpen: (value: boolean) => void;
-  update:any;
+  update: any;
 }) => {
-  const [tempProfile, setTempprofile] = useState<string>("");
-  const { register, watch, reset, setValue } = useForm<investmentType>();
+  const [isProfileUploading, setisProfileUploading] = useState<boolean>(false);
+  const { register, watch, reset, setValue, unregister } =
+    useForm<investmentType>();
   const { _id, profile_img, ...remInvestData } = watch();
 
   // save data
@@ -48,24 +64,24 @@ const InvestmentPopUp = ({
     }
   };
 
-  const DeleteInvestment = async()=>{
+  const DeleteInvestment = async () => {
     try {
       const resonse = await axios.delete(`/api/investments/${_id}`);
       toast.success(resonse.data.message);
       update();
       handleClose();
       reset();
-    } catch (error:any) {
-       toast.error(error.message);
+    } catch (error: any) {
+      toast.error(error.message);
     }
-  }
+  };
 
   const handleChange = (e: any) => {
-    console.log(e.target.files[0], "filellellele");
     const formdata = new FormData();
     formdata.append("file", e.target.files[0]);
     formdata.append("upload_preset", "Turfease");
     setValue("profile_img", URL.createObjectURL(e.target.files[0]));
+    setisProfileUploading(true);
     uploadProf(formdata);
   };
   //uploadprofie
@@ -75,20 +91,24 @@ const InvestmentPopUp = ({
         `https://api.cloudinary.com/v1_1/ddos89bpu/image/upload`,
         data
       );
-      console.log(response.data, "img--------->");
       setValue("profile_img", response.data.secure_url);
+      setisProfileUploading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    if (Object.keys(selectedInvest || {}).length > 0) {
-      reset(selectedInvest);
+    reset(initialValues);
+    if (Object.keys(selectedInvest || {})?.length > 0) {
+      const { maturity, ...remSelectedInvest } = selectedInvest;
+      const UpdateMaturity = maturity.split("T")[0];
+      reset({ maturity: UpdateMaturity, ...remSelectedInvest });
     }
   }, [selectedInvest, isOpen]);
 
   const handleClose = () => {
+    unregister();
     reset();
     setISOpen(false);
   };
@@ -154,27 +174,45 @@ const InvestmentPopUp = ({
                 <div>
                   <p>Get Price</p>
                   <input
-                    {...register("get_price", { required: true })}
+                    {...register("get_price", {
+                      required: true,
+                      pattern: {
+                        value: /^\d+$/,
+                        message: "Enter valid get_price",
+                      },
+                    })}
                     className="border w-full p-2 border-gray-300"
-                    type="text"
+                    type="number"
                     placeholder="Enter Get Price"
                   />
                 </div>
                 <div>
                   <p>Total Price</p>
                   <input
-                    {...register("total_price", { required: true })}
+                    {...register("total_price", {
+                      required: true,
+                      pattern: {
+                        value: /^\d+$/,
+                        message: "Enter valid total_price",
+                      },
+                    })}
                     className="border w-full p-2 border-gray-300"
-                    type="text"
+                    type="number"
                     placeholder="Enter total Price"
                   />
                 </div>
                 <div>
                   <p>Min Investment</p>
                   <input
-                    {...register("min_invest", { required: true })}
+                    {...register("min_invest", {
+                      required: true,
+                      pattern: {
+                        value: /^\d+$/,
+                        message: "Enter valid min_invest",
+                      },
+                    })}
                     className="border w-full p-2 border-gray-300"
-                    type="text"
+                    type="number"
                     placeholder="Enter Min Investment"
                   />
                 </div>
@@ -183,7 +221,7 @@ const InvestmentPopUp = ({
                   <input
                     {...register("maturity", { required: true })}
                     className="border w-full p-2 border-gray-300"
-                    type="text"
+                    type="date"
                     placeholder="Enter Maturity"
                   />
                 </div>
@@ -199,7 +237,13 @@ const InvestmentPopUp = ({
                 <div>
                   <p>Invest Multiple</p>
                   <input
-                    {...register("multiple_invest", { required: true })}
+                    {...register("multiple_invest", {
+                      required: true,
+                      pattern: {
+                        value: /^-?\d+(\.\d+)?$/,
+                        message: "Enter valid invest_multiple",
+                      },
+                    })}
                     className="border w-full p-2 border-gray-300"
                     type="text"
                     placeholder="Enter Invest Multiple"
@@ -226,7 +270,12 @@ const InvestmentPopUp = ({
                 >
                   {_id ? "Delete" : "Cancel"}
                 </button>
-                <button type="submit" className="lightGreen-button !w-max">
+                <button
+                  type="submit"
+                  className={`lightGreen-button !w-max ${
+                    isProfileUploading ? "cursor-wait pointer-events-none" : ""
+                  }`}
+                >
                   {_id ? "Update" : "Save"}
                 </button>
               </div>

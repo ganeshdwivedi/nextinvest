@@ -19,14 +19,14 @@ const InvestmentCard = ({
           {seperatedTags?.map((item: string) => (
             <span
               key={item}
-              className="bg-white uppercase bg-opacity-70 font-regular text-[12px] px-3 py-1"
+              className="bg-white uppercase bg-opacity-80 font-regular text-[12px] px-3 py-1"
             >
               {item}
             </span>
           ))}
         </div>
         <img
-          className="h-[200px]"
+          className="h-[200px] w-full"
           src={data.profile_img ? data.profile_img : "/images/fallback-img.jpg"}
         />
       </div>
@@ -76,7 +76,8 @@ const InvestmentCard = ({
             if (setSelectedInvest && setISOpen) {
               setSelectedInvest(data);
               setISOpen(true);
-            }}}
+            }
+          }}
           className="bg-secondary absolute bottom-0 py-[8px] text-white hover:text-secondary hover:bg-white w-full border-2 border-secondary hover:delay-75 font-medium uppercase"
         >
           VIEW
