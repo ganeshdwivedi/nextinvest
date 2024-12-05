@@ -22,7 +22,8 @@ const RaiseCapital = () => {
           <img className="w-full" alt="img" src={"/images/2.svg"} />
         </div>
         <img
-          src={"/images/shape.svg"}
+        alt="img"
+          src={"/images/Shape.svg"}
           className="absolute w-52 top-10 right-0"
         />
       </Fade>
