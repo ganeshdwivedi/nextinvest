@@ -6,7 +6,7 @@ const InvestSchema = new mongoose.Schema({
   description: { type: String, required: true },
   security_type: { type: String, required: true },
   multiple_invest: { type: Number, required: true },
-  profile_img: { type: String, default: "" },
+  profile_img: { type: String, default: null },
   min_invest: { type: Number, required: true },
   get_price: { type: Number, required: true },
   total_price: { type: Number, required: true },

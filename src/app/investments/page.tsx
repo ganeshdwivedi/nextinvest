@@ -25,7 +25,13 @@ const page = () => {
   return (
     <div className="px-52 py-24">
       <div className="flex flex-row justify-end mb-10">
-        <button className="primary-button" onClick={() => {setISOpen(true);setSelectedInvest({})}}>
+        <button
+          className="primary-button"
+          onClick={() => {
+            setISOpen(true);
+            setSelectedInvest({});
+          }}
+        >
           Add Investments +
         </button>
       </div>
@@ -36,15 +42,12 @@ const page = () => {
       >
         {allInvestments?.length > 0 ? (
           allInvestments?.map((item: any) => (
-            <div
-              key={item._id}
-              onClick={() => {
-                setSelectedInvest(item);
-                setISOpen(true);
-              }}
-            >
-              <InvestmentCard data={item} />
-            </div>
+              <InvestmentCard
+              setISOpen={setISOpen}
+                key={item._id}
+                setSelectedInvest={setSelectedInvest}
+                data={item}
+              />
           ))
         ) : (
           <div>

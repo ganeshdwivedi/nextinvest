@@ -9,6 +9,6 @@ export default interface investmentType{
   min_invest: number,
   get_price: number,
   total_price: number,
-  maturity:Date,
+  maturity:string,
   tags:string
 }

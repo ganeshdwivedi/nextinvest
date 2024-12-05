@@ -4,8 +4,8 @@ import { sendEmail } from "@/helper/sendMail";
 import Subscriber from "@/model/subscriberModel";
 import { NextRequest, NextResponse } from "next/server";
 
+dbConnect();
 export async function POST(request: NextRequest) {
-  await dbConnect();
 
   // Extract the email for POST
   const { email } = await request.json(); // Correct way to get data from the request body

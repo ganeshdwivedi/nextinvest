@@ -4,8 +4,8 @@ import bcrypt from "bcrypt";
 import generateToken from "@/helper/GenerateToken";
 import dbConnect from "@/helper/dbConnet";
 
+dbConnect();
 export async function POST(request: NextRequest){
-   await dbConnect();
   const { email, password } = await request.json();
   try {
     const ExistUser = await userModel.findOne({ email: email });

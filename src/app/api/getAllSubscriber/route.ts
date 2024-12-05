@@ -1,7 +1,9 @@
+import dbConnect from "@/helper/dbConnet";
 import { getDataFromToken } from "@/helper/getDataFromToken";
 import Subscriber from "@/model/subscriberModel";
 import { NextRequest, NextResponse } from "next/server";
 
+dbConnect();
 export async function GET(request:NextRequest){
      try {
        const loggedInUserEmail = await getDataFromToken(request);

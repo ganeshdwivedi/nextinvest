@@ -196,12 +196,12 @@ const InvestmentPopUp = ({
                   />
                 </div>
                 <div>
-                  <p>Multiple Invest</p>
+                  <p>Invest Multiple</p>
                   <input
                     {...register("multiple_invest", { required: true })}
                     className="border w-full p-2 border-gray-300"
                     type="text"
-                    placeholder="Enter Multiple Invest"
+                    placeholder="Enter Invest Multiple"
                   />
                 </div>
                 <div>
@@ -219,7 +219,7 @@ const InvestmentPopUp = ({
               </div>
               <div className="flex flex-row items-center justify-between mt-5">
                 <button
-                  onClick={_id?DeleteInvestment:handleClose}
+                  onClick={_id ? DeleteInvestment : handleClose}
                   type="reset"
                   className="secondary-button !w-max"
                 >

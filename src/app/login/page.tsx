@@ -3,6 +3,7 @@ import { setDefaultCookie } from "@/helper/cookieCRUD";
 import { loginUser } from "@/redux/authSlice";
 import { RootState } from "@/redux/store";
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -77,8 +78,8 @@ const page = () => {
           <button type="submit" className="lightGreen-button mt-3 !w-max">
             Login
           </button>
-          <p>
-            Don't have an account ? <button className="">Register</button>
+          <p className="font-regular text-gray-700">
+            Don't have an account ? <Link href={'/register'} className="hover:text-primary">Register</Link>
           </p>
         </form>
       </div>

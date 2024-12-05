@@ -3,8 +3,8 @@ import { getDataFromToken } from "@/helper/getDataFromToken";
 import InvestModel from "@/model/InvestModel";
 import { NextRequest, NextResponse } from "next/server";
 
+dbConnect();
 export async function POST(request:NextRequest){
-      await dbConnect();
 
     const InvestData = await request.json();
      try {

@@ -4,11 +4,10 @@ import bcrypt from "bcrypt";
 import generateToken from "@/helper/GenerateToken";
 import dbConnect from "@/helper/dbConnet";
 
+dbConnect();
 const saltRound = process.env.SALT_ROUND || 16;
 export async function POST(request: NextRequest) {
-  await dbConnect();
   const { email, password, name, profile } = await request.json();
-  console.log(email, password, name, profile, "body");
   try {
     // chekcing if user already exists with same email
     const ExistUser = await userModel.findOne({ email: email });

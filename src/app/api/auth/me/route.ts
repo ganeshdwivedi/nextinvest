@@ -3,8 +3,8 @@ import { getDataFromToken } from "@/helper/getDataFromToken";
 import userModel from "@/model/userModel";
 import { NextRequest, NextResponse } from "next/server";
 
+dbConnect();
 export async function GET(request: NextRequest) {
-  await dbConnect();
 
   try {
     const userEmail = await getDataFromToken(request);

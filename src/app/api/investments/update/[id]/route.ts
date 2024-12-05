@@ -3,8 +3,8 @@ import { getDataFromToken } from "@/helper/getDataFromToken";
 import InvestModel from "@/model/InvestModel";
 import { NextRequest, NextResponse } from "next/server";
 
+dbConnect();
 export async function PUT(request: NextRequest, context: any) {
-  await dbConnect();
 
   const { id: slug } = await context.params;
   const InvestData = await request.json();
