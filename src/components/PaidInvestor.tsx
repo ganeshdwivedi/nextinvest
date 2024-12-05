@@ -1,4 +1,6 @@
+'use client'
 import React from 'react'
+import { Slide } from 'react-awesome-reveal'
 
 const PaidInvestor = () => {
   return (
@@ -11,9 +13,11 @@ const PaidInvestor = () => {
           and debt financing investments
         </h6>
       </div>
-      <div>
-        <img src={"/images/16.svg"} alt="chart-img" />
-      </div>
+      <Slide direction="right" triggerOnce>
+        <div>
+          <img src={"/images/16.svg"} alt="chart-img" />
+        </div>
+      </Slide>
       <img
         src={"/images/1.svg"}
         alt="layer-img"

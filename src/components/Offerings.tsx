@@ -18,7 +18,7 @@ const Offerings = () => {
      getAllInvestments();
    }, []);
   return (
-    <div className="px-52 py-24 bg-white">
+    <div className="px-52 py-24 relative bg-white">
       <h2 className="text-center font-medium text-4xl">
         Offerings open for investment
       </h2>
@@ -26,6 +26,7 @@ const Offerings = () => {
         Explore pre-vetted investment opportunites available in a growing number
         of industry categories
       </h6>
+      <img src={"/images/shape.svg"} className="absolute w-52 top-52 left-10" />
       <div className="grid grid-cols-3 gap-5  my-7">
         {allInvestments?.length > 0 ? (
           allInvestments.map((item: any, index: number) => (

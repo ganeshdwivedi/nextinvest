@@ -53,6 +53,7 @@ const InvestmentPopUp = ({
       const resonse = await axios.delete(`/api/investments/${_id}`);
       toast.success(resonse.data.message);
       update();
+      handleClose();
       reset();
     } catch (error:any) {
        toast.error(error.message);

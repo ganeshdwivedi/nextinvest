@@ -1,9 +1,9 @@
 "use client";
-import { useDisclosure } from "@nextui-org/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import InvestmentPopUp from "./InvestmenPopUp";
 import InvestmentCard from "@/components/InvestmentCard";
+import { Slide } from "react-awesome-reveal";
 
 const page = () => {
   const [isOpen, setISOpen] = useState(false);
@@ -35,29 +35,33 @@ const page = () => {
           Add Investments +
         </button>
       </div>
-      <div
-        className={`${
-          allInvestments?.length > 0 ? "grid grid-cols-3 gap-3" : ""
-        }`}
-      >
-        {allInvestments?.length > 0 ? (
-          allInvestments?.map((item: any) => (
+      <Slide cascade={true} direction="up">
+        <div
+          className={`${
+            allInvestments?.length > 0 ? "grid grid-cols-3 gap-3" : ""
+          }`}
+        >
+          {allInvestments?.length > 0 ? (
+            allInvestments?.map((item: any) => (
               <InvestmentCard
-              setISOpen={setISOpen}
+                setISOpen={setISOpen}
                 key={item._id}
                 setSelectedInvest={setSelectedInvest}
                 data={item}
               />
-          ))
-        ) : (
-          <div>
-            <h2 className="text-5xl font-medium">No Investment cards found</h2>
-            <p className="font-regular text-gray-600">
-              you can add investemnt cards.
-            </p>
-          </div>
-        )}
-      </div>
+            ))
+          ) : (
+            <div>
+              <h2 className="text-5xl font-medium">
+                No Investment cards found
+              </h2>
+              <p className="font-regular text-gray-600">
+                you can add investemnt cards.
+              </p>
+            </div>
+          )}
+        </div>
+      </Slide>
       <InvestmentPopUp
         update={getAllInvestments}
         selectedInvest={selectedInvest}

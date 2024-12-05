@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.5",
     "@nextui-org/react": "^2.4.8",
     "@reduxjs/toolkit": "^2.4.0",
     "@sendgrid/mail": "^8.1.4",
@@ -20,6 +21,7 @@
     "mongoose": "^8.8.3",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
+    "react-awesome-reveal": "^4.2.14",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "react-hook-form": "^7.53.2",
     "react-hot-toast": "^2.4.1",

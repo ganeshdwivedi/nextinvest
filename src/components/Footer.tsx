@@ -12,6 +12,7 @@ import {
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { AttentionSeeker } from "react-awesome-reveal";
 
 interface Subscribe {
   email: String;
@@ -107,32 +108,30 @@ const Footer = () => {
                 type="email"
                 placeholder="Email address"
               />
-              <button type="submit" className="">
-                <FaChevronRight className="bg-secondary hover:bg-white hover:text-secondary delay-75 w-8 h-9 rounded-t-md p-[10px] text-white " />
-              </button>
+              <AttentionSeeker effect={"jello"}>
+                <button type="submit" className="">
+                  <FaChevronRight className="bg-secondary hover:bg-white hover:text-secondary delay-75 w-8 h-9 rounded-t-md p-[10px] text-white " />
+                </button>
+              </AttentionSeeker>
             </div>
           </form>
         </div>
         <div className="flex flex-row items-center gap-6">
-          <FaFacebookF />
-          <IoLogoTwitter />
-          <FaInstagram />
+          <FaFacebookF className="cursor-pointer" />
+          <IoLogoTwitter className="cursor-pointer" />
+          <FaInstagram className="cursor-pointer" />
         </div>
       </div>
       <div className="flex flex-row py-3 border-t border-primary items-center justify-between ">
         <div className="font-regular">
           Made by{" "}
-          <span
-            onClick={() =>
-              window.open(
-                "https://www.linkedin.com/in/ganeshdwivedi-",
-                "_blank"
-              )
-            }
+          <a
+          target="_blank"
+            href="https://drive.google.com/file/d/1qIOTE_0Alf4v-KbUHmgWHtSWlAfMjhk-/view?usp=sharing"
             className="cursor-pointer font-medium hover:text-primary"
           >
             Ganesh Dwivedi
-          </span>
+          </a>
         </div>
         <div className="flex flex-row items-center gap-5">
           <FaGithub
