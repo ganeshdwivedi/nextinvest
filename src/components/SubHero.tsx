@@ -1,11 +1,17 @@
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+import { Slide } from "react-awesome-reveal";
+import { FaArrowRight } from "react-icons/fa6";
 import { PiLayout } from "react-icons/pi";
 
 function SubHero() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50 relative overflow-hidden">
+    <div
+      id="TopBar"
+      className="min-h-screen bg-gradient-to-br from-orange-50 to-yellow-50 relative overflow-hidden"
+    >
       {/* Decorative airplane icons */}
       <div className="absolute top-20 right-20 text-blue-400 opacity-60 hidden lg:block">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -29,20 +35,19 @@ function SubHero() {
           <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
             <div className="space-y-4">
               <p className="text-orange-500 font-semibold text-sm lg:text-base tracking-wide uppercase">
-                Best destinations around the world
+                Explore Top Hostels Around the World
               </p>
               <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold text-slate-800 leading-tight">
-                Travel, enjoy{" "}
+                stay social{" "}
                 <span className="relative">
-                  and live a new
+                  and live the experience
                   <div className="absolute -bottom-2 left-0 w-full h-3 bg-orange-300 opacity-60 -z-10"></div>
                 </span>{" "}
-                and full life
               </h1>
               <p className="text-slate-600 text-base lg:text-lg leading-relaxed max-w-md">
-                Built Wicket longer admire do barton vanity itself do in it.
-                Preferred to sportsmen it engrossed listening. Park gate sell
-                they west hard for the.
+                Find affordable, comfortable, and vibrant hostels wherever you
+                go. Meet new people, share stories, and make every stay a
+                memory.
               </p>
             </div>
 
@@ -53,32 +58,31 @@ function SubHero() {
               >
                 Find out more
               </Button>
-              <Button
-                variant="ghost"
-                className="flex items-center gap-3 text-slate-700 hover:text-slate-900 p-0"
-              >
+              <Link href={"/"} className="flex items-center gap-3 p-0">
                 <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
-                  <PiLayout
+                  <FaArrowRight
                     className="w-5 h-5 text-white ml-1"
                     fill="currentColor"
                   />
                 </div>
-                <span className="font-medium">Play Demo</span>
-              </Button>
+              </Link>
             </div>
           </div>
 
           {/* Right Content - Image */}
           <div className=" order-1 lg:order-2">
             <div className="relative w-full max-w-lg mx-auto lg:max-w-none">
-              <Image
-                src="/images/Traveller 1.png"
-                alt="Woman traveler with backpack and suitcase"
-                width={600}
-                height={700}
-                className="w-full h-auto object-contain"
-                priority
-              />
+              <Slide direction="right">
+                {" "}
+                <Image
+                  src="/images/Traveller 1.png"
+                  alt="Woman traveler with backpack and suitcase"
+                  width={600}
+                  height={700}
+                  className="w-full h-auto object-contain"
+                  priority
+                />
+              </Slide>
             </div>
           </div>
         </div>

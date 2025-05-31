@@ -5,6 +5,7 @@ import axios from "axios";
 import React, { FormEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { CiCamera } from "react-icons/ci";
 import { FaCamera } from "react-icons/fa6";
 
 const initialValues: investmentType = {
@@ -12,13 +13,8 @@ const initialValues: investmentType = {
   title: "",
   location: "",
   description: "",
-  security_type: "",
-  multiple_invest: 0,
   profile_img: "",
-  min_invest: 0,
-  get_price: 0,
   total_price: 0,
-  maturity: "",
   tags: "",
 };
 
@@ -33,6 +29,7 @@ const InvestmentPopUp = ({
   setISOpen: (value: boolean) => void;
   update: any;
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [isProfileUploading, setisProfileUploading] = useState<boolean>(false);
   const { register, watch, reset, setValue, unregister } =
     useForm<investmentType>();
@@ -40,6 +37,7 @@ const InvestmentPopUp = ({
 
   // save data
   const handleSave = async () => {
+    setIsLoading(true);
     if (_id) {
       try {
         const response = await axios.put(`/api/investments/update/${_id}`, {
@@ -62,6 +60,7 @@ const InvestmentPopUp = ({
         toast.error(error.message);
       }
     }
+    setIsLoading(false);
   };
 
   const DeleteInvestment = async () => {
@@ -84,6 +83,7 @@ const InvestmentPopUp = ({
     setisProfileUploading(true);
     uploadProf(formdata);
   };
+
   //uploadprofie
   const uploadProf = async (data: any) => {
     try {
@@ -101,9 +101,8 @@ const InvestmentPopUp = ({
   useEffect(() => {
     reset(initialValues);
     if (Object.keys(selectedInvest || {})?.length > 0) {
-      const { maturity, ...remSelectedInvest } = selectedInvest;
-      const UpdateMaturity = maturity.split("T")[0];
-      reset({ maturity: UpdateMaturity, ...remSelectedInvest });
+      const { ...remSelectedInvest } = selectedInvest;
+      reset({ ...remSelectedInvest });
     }
   }, [selectedInvest, isOpen]);
 
@@ -115,7 +114,12 @@ const InvestmentPopUp = ({
 
   return (
     <div>
-      <Modal isOpen={isOpen} onClose={handleClose} placement="top-center">
+      <Modal
+        className="w-[750px]"
+        isOpen={isOpen}
+        onClose={handleClose}
+        placement="top-center"
+      >
         <ModalContent>
           <ModalBody>
             <form
@@ -123,158 +127,178 @@ const InvestmentPopUp = ({
                 e.preventDefault();
                 handleSave();
               }}
+              className="space-y-6"
             >
-              <h2 className="text-4xl font-semibold mb-5">Investment Info</h2>
-              <div className="mb-2 w-24 relative">
-                <img
-                  className="w-24 h-24 overflow-hidden object-cover
-                rounded-md"
-                  alt="invest-img"
-                  src={profile_img ? profile_img : "/images/fallback-img.jpg"}
-                />
-                <div className="rounded-full py-[3px] px-[3px] absolute bottom-1 right-1 bg-black text-white w-4 h-4">
-                  <FaCamera className="text-[10px]" />
-                  <div className="relative">
+              <h2 className="text-3xl font-bold text-center">
+                Hostel Information
+              </h2>
+
+              {/* Image Upload */}
+              <div className="flex items-center gap-4">
+                <div className="relative w-24 h-24">
+                  {profile_img ? (
+                    <img
+                      src={profile_img}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="bg-gray-300 w-full h-full flex items-center justify-center">
+                      <CiCamera />
+                    </div>
+                  )}
+                  <label className="absolute bottom-1 right-1 bg-black text-white rounded-full p-[3px] cursor-pointer">
+                    <FaCamera className="text-xs" />
                     <input
-                      className="w-5 h-5 absolute top-[-9px] opacity-0 right-0"
                       type="file"
+                      className="absolute inset-0 opacity-0 cursor-pointer"
                       onChange={handleChange}
                     />
-                  </div>
+                  </label>
                 </div>
+                <p className="text-sm text-gray-500">
+                  Upload a representative image for the hostel.
+                </p>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+
+              {/* Form Fields */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <p>Title</p>
+                  <label className="block text-sm font-medium">Title</label>
                   <input
                     {...register("title", { required: true })}
-                    className="border w-full p-2 border-gray-300"
+                    className="form-input border px-2 py-2 rounded-md"
                     type="text"
                     placeholder="Enter Title"
                   />
                 </div>
                 <div>
-                  <p>Description</p>
+                  <label className="block text-sm font-medium">
+                    Description
+                  </label>
                   <input
                     {...register("description", { required: true })}
-                    className="border w-full p-2 border-gray-300"
+                    className="form-input border px-2 py-2 rounded-md"
                     type="text"
                     placeholder="Enter Description"
                   />
                 </div>
                 <div>
-                  <p>location</p>
+                  <label className="block text-sm font-medium">Location</label>
                   <input
                     {...register("location", { required: true })}
-                    className="border w-full p-2 border-gray-300"
+                    className="form-input border px-2 py-2 rounded-md"
                     type="text"
-                    placeholder="Enter location"
+                    placeholder="Enter Location"
                   />
                 </div>
-                <div>
-                  <p>Get Price</p>
+                {/* <div>
+                  <label className="block text-sm font-medium">
+                    Get Price (₹)
+                  </label>
                   <input
                     {...register("get_price", {
                       required: true,
-                      pattern: {
-                        value: /^\d+$/,
-                        message: "Enter valid get_price",
-                      },
+                      pattern: /^\d+$/,
                     })}
-                    className="border w-full p-2 border-gray-300"
+                    className="form-input border px-2 py-2 rounded-md"
                     type="number"
                     placeholder="Enter Get Price"
                   />
-                </div>
+                </div> */}
                 <div>
-                  <p>Total Price</p>
+                  <label className="block text-sm font-medium">
+                    Price (₹) per month
+                  </label>
                   <input
                     {...register("total_price", {
                       required: true,
-                      pattern: {
-                        value: /^\d+$/,
-                        message: "Enter valid total_price",
-                      },
+                      pattern: /^\d+$/,
                     })}
-                    className="border w-full p-2 border-gray-300"
+                    className="form-input border px-2 py-2 rounded-md"
                     type="number"
-                    placeholder="Enter total Price"
+                    placeholder="Enter Total Price"
                   />
                 </div>
-                <div>
-                  <p>Min Investment</p>
+                {/* <div>
+                  <label className="block text-sm font-medium">
+                    Minimum Investment
+                  </label>
                   <input
                     {...register("min_invest", {
                       required: true,
-                      pattern: {
-                        value: /^\d+$/,
-                        message: "Enter valid min_invest",
-                      },
+                      pattern: /^\d+$/,
                     })}
-                    className="border w-full p-2 border-gray-300"
+                    className="form-input border px-2 py-2 rounded-md"
                     type="number"
-                    placeholder="Enter Min Investment"
+                    placeholder="Enter Minimum Investment"
                   />
-                </div>
-                <div>
-                  <p>Maturity</p>
+                </div> */}
+                {/* <div>
+                  <label className="block text-sm font-medium">
+                    Maturity Date
+                  </label>
                   <input
                     {...register("maturity", { required: true })}
-                    className="border w-full p-2 border-gray-300"
+                    className="form-input border px-2 py-2 rounded-md"
                     type="date"
-                    placeholder="Enter Maturity"
                   />
-                </div>
-                <div>
-                  <p>Security Type</p>
+                </div> */}
+                {/* <div>
+                  <label className="block text-sm font-medium">
+                    Security Type
+                  </label>
                   <input
                     {...register("security_type", { required: true })}
-                    className="border w-full p-2 border-gray-300"
+                    className="form-input border px-2 py-2 rounded-md"
                     type="text"
                     placeholder="Enter Security Type"
                   />
-                </div>
-                <div>
-                  <p>Invest Multiple</p>
+                </div> */}
+                {/* <div>
+                  <label className="block text-sm font-medium">
+                    Investment Multiple
+                  </label>
                   <input
                     {...register("multiple_invest", {
                       required: true,
-                      pattern: {
-                        value: /^-?\d+(\.\d+)?$/,
-                        message: "Enter valid invest_multiple",
-                      },
+                      pattern: /^-?\d+(\.\d+)?$/,
                     })}
-                    className="border w-full p-2 border-gray-300"
+                    className="form-input border px-2 py-2 rounded-md"
                     type="text"
-                    placeholder="Enter Invest Multiple"
+                    placeholder="e.g., 1.5"
                   />
-                </div>
+                </div> */}
                 <div>
-                  <p>tags</p>
+                  <label className="block text-sm font-medium">Amenities</label>
                   <input
                     {...register("tags", { required: true })}
-                    className="border w-full p-2 border-gray-300"
+                    className="form-input border px-2 py-2 rounded-md"
                     type="text"
-                    placeholder="Enter tags"
+                    placeholder="comma separated"
                   />
-                  <p className="text-[10px] text-gray-600">
-                    you can add one ore more tags separating by " , "
+                  <p className="text-xs text-gray-500">
+                    Add one or more Amenities, separated by commas.
                   </p>
                 </div>
               </div>
-              <div className="flex flex-row items-center justify-between mt-5">
+
+              {/* Actions */}
+              <div className="flex justify-between items-center pt-4">
                 <button
+                  type="button"
                   onClick={_id ? DeleteInvestment : handleClose}
-                  type="reset"
-                  className="secondary-button !w-max"
+                  className="secondary-button"
                 >
                   {_id ? "Delete" : "Cancel"}
                 </button>
                 <button
                   type="submit"
-                  className={`lightGreen-button !w-max ${
-                    isProfileUploading ? "cursor-wait pointer-events-none" : ""
+                  className={`lightGreen-button ${
+                    isProfileUploading || isLoading
+                      ? "opacity-50 cursor-wait"
+                      : ""
                   }`}
+                  disabled={isProfileUploading}
                 >
                   {_id ? "Update" : "Save"}
                 </button>

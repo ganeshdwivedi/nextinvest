@@ -18,7 +18,7 @@ interface route {
 }
 const InitialRoutes = [
   {
-    title: "Investment Opportunity",
+    title: "Hostels",
     icon: true,
     type: "no",
     to: "#",
@@ -27,7 +27,7 @@ const InitialRoutes = [
     title: "How it works",
     icon: true,
     type: "no",
-    to: "#",
+    to: "#how",
   },
   {
     title: "About us",
@@ -38,33 +38,27 @@ const InitialRoutes = [
   {
     title: "Login",
     icon: false,
-    type: "primary-button",
+    type: "border-orange-500 hover:text-white border-2 hover:bg-orange-600 px-8 py-3 rounded-lg text-orange-500 font-medium flex flex-row items-center gap-1",
     to: "/login",
   },
   {
     title: "Register",
     icon: false,
-    type: "secondary-button",
+    type: "bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg text-base font-medium flex flex-row items-center gap-1",
     to: "/register",
   },
 ];
 const AuthRoutes = [
   {
-    title: "All Investment",
+    title: "All hostels",
     icon: false,
     type: "no",
-    to: "/investments",
-  },
-  {
-    title: "Subscriber",
-    icon: true,
-    type: "no",
-    to: "/subscribers",
+    to: "/hotels",
   },
   {
     title: "Logout",
     icon: false,
-    type: "secondary-button",
+    type: "border-orange-500 hover:text-white border-2 hover:bg-orange-600 px-8 py-3 rounded-lg text-orange-500 font-medium flex flex-row items-center gap-1",
     to: "#",
   },
 ];
@@ -113,7 +107,7 @@ const NavBar = () => {
       } flex flex-row items-center justify-between gap-10 px-52 py-6 shadow-md w-full`}
     >
       <Link href={"/"}>
-        <img src={"/images/4.svg"} alt="logo-img" />
+        <h4 className="text-orange-500 font-bold text-2xl">HostelsForU</h4>
       </Link>
       <div className="flex flex-row items-center gap-4">
         {Auth.isLoggedIn
@@ -125,17 +119,17 @@ const NavBar = () => {
                 href={route.to}
               >
                 {route.title}{" "}
-                {route.icon && <FaChevronDown className="text-[10px]" />}
+                {/* {route.icon && <FaChevronDown className="text-[10px]" />} */}
               </Link>
             ))
           : InitialRoutes.map((route: route) => (
               <Link
                 key={route.title}
-                className={`${route.type} font-medium flex flex-row items-center gap-1`}
+                className={`${route.type}`}
                 href={route.to}
               >
                 {route.title}{" "}
-                {route.icon && <FaChevronDown className="text-[10px]" />}
+                {/* {route.icon && <FaChevronDown className="text-[10px]" />} */}
               </Link>
             ))}
       </div>

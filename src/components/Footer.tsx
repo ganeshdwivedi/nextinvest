@@ -17,6 +17,7 @@ import { AttentionSeeker } from "react-awesome-reveal";
 interface Subscribe {
   email: String;
 }
+
 const Footer = () => {
   const { register, watch } = useForm<Subscribe>();
 
@@ -24,15 +25,13 @@ const Footer = () => {
     try {
       const response = await axios.post("/api/subscribe", watch());
       toast.success(response.data.message);
-      console.log(response, "response");
-    } catch (error:any) {
-      toast.success(error.message);
-
-      console.log(error, "error");
+    } catch (error: any) {
+      toast.error(error.message);
     }
   };
+
   const handleScroll = (event: any) => {
-    event.preventDefault(); // Prevent default anchor behavior
+    event.preventDefault();
     const targetElement = document.getElementById("TopBar");
 
     if (targetElement) {
@@ -44,40 +43,40 @@ const Footer = () => {
   };
 
   return (
-    <div className="px-52 gap-5 pt-24 bg-footer">
+    <div className="px-52 gap-5 pt-24 bg-orange-50">
       <div className="flex flex-row justify-between items-start">
         <div>
-          <h4 className="font-regular text-2xl">Next Invest</h4>
+          <h4 className="font-regular text-2xl">HostelConnect</h4>
           <p className="flex flex-row mt-2 text-[15px] items-center font-regular text-gray-800">
-            Copyright <MdCopyright className="text-[10px]" /> 2020. LogoIpsum.
-            All rights reserved
+            Copyright <MdCopyright className="text-[10px]" /> 2025.
+            HostelConnect. All rights reserved.
           </p>
         </div>
         <div className="flex flex-col gap-2 items-start ">
-          <h4 className="font-medium">Services</h4>
+          <h4 className="font-medium">Hostel Services</h4>
           <button className="font-regular text-[15px] text-gray-800">
-            Email Marketing
+            Bed Booking
           </button>
           <button className="font-regular text-[15px] text-gray-800">
-            Campaigns
+            Long-Term Stays
           </button>
           <button className="font-regular text-[15px] text-gray-800">
-            Branding
+            Group Discounts
           </button>
           <button className="font-regular text-[15px] text-gray-800">
-            Offline
+            City Guides
           </button>
         </div>
         <div className="flex flex-col gap-2 items-start ">
-          <h4 className="font-medium">About</h4>
+          <h4 className="font-medium">Company</h4>
           <button className="font-regular text-[15px] text-gray-800">
-            Our Story
+            About Us
           </button>
           <button className="font-regular text-[15px] text-gray-800">
-            Benefits
+            Why HostelConnect
           </button>
           <button className="font-regular text-[15px] text-gray-800">
-            Team
+            Hostel Partners
           </button>
           <button className="font-regular text-[15px] text-gray-800">
             Careers
@@ -86,14 +85,14 @@ const Footer = () => {
         <div className="flex flex-col gap-2 items-start ">
           <IoIosArrowDropupCircle
             onClick={(e) => handleScroll(e)}
-            className="text-primary text-4xl cursor-pointer"
+            className="text-orange-500 text-4xl cursor-pointer"
           />
         </div>
       </div>
       <div className="mt-12 pb-24 flex flex-row items-end justify-between">
         <div className="">
           <h4 className="font-medium text-gray-800">
-            Subscribe to our newsletter
+            Stay in the loop with hostel updates
           </h4>
           <form
             onSubmit={(e: FormEvent<HTMLFormElement>) => {
@@ -106,11 +105,11 @@ const Footer = () => {
                 {...register("email")}
                 className="bg-footer p-1 py-2 font-regular border-b border-gray-300"
                 type="email"
-                placeholder="Email address"
+                placeholder="Your email address"
               />
               <AttentionSeeker effect={"jello"}>
-                <button type="submit" className="">
-                  <FaChevronRight className="bg-secondary hover:bg-white hover:text-secondary delay-75 w-8 h-9 rounded-t-md p-[10px] text-white " />
+                <button type="submit">
+                  <FaChevronRight className="bg-orange-500 hover:bg-white hover:text-orange-500 delay-75 w-8 h-9 rounded-t-md p-[10px] text-white " />
                 </button>
               </AttentionSeeker>
             </div>
@@ -124,9 +123,9 @@ const Footer = () => {
       </div>
       <div className="flex flex-row py-3 border-t border-primary items-center justify-between ">
         <div className="font-regular">
-          Made by{" "}
+          Built with ❤️ by{" "}
           <a
-          target="_blank"
+            target="_blank"
             href="https://drive.google.com/file/d/1qIOTE_0Alf4v-KbUHmgWHtSWlAfMjhk-/view?usp=sharing"
             className="cursor-pointer font-medium hover:text-primary"
           >

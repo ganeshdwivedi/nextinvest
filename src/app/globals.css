@@ -21,13 +21,7 @@ body {
 } */
 
 /* Reused  buttons CSS */
-.primary-button {
-  background-color: #128b76;
-  border: 2px solid #128b76;
-  color: white;
-  padding: 6px 20px;
-  text-transform: uppercase;
-}
+
 
 .primary-button:hover{
   background-color: white;
@@ -51,8 +45,8 @@ body {
 }
 
 .lightGreen-button {
-  background-color: #128b76;
-  border: 2px solid #128b76;
+  background-color: #f56b8d;
+  border: 2px solid #f56b8d;
   color: white;
   padding: 6px 24px;
   text-transform: uppercase;
@@ -60,7 +54,7 @@ body {
 
 .lightGreen-button:hover {
   background-color: white;
-  color: #128b76;
+  color: #f56b8d;
   transition-delay: 0.08s;
 }
 

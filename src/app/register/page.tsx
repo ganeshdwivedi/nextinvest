@@ -13,83 +13,120 @@ import { useDispatch } from "react-redux";
 const page = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [isPasswordVisible, setIsPassWordVisible] = useState(false);
   const { watch, register, reset, setValue } = useForm();
-  const [isPasswordVisible, setIsPassWordVisible] = useState<boolean>(false);
+  const { name, email, password, isLoading } = watch();
 
   const OnSubmit = async () => {
+    setValue("isLoading", true);
     try {
-      const response = await axios.post("/api/auth/register", watch());
+      const response = await axios.post("/api/auth/register", {
+        name,
+        email,
+        password,
+      });
       setDefaultCookie("user", JSON.stringify(response.data.data));
       dispatch(loginUser(response.data.user));
       toast.success(response.data.message);
-      router.push("/investments");
+      router.push("/hostels");
+      reset();
     } catch (error: any) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || error.message);
     }
+    setValue("isLoading", false);
   };
+
   return (
-    <div className="flex flex-row items-center justify-between gap-10 px-52 py-10">
-      <div className="flex flex-col gap-3 p-16 border border-gray-150 w-[500px] shadow-lg">
-        <form
-          onSubmit={(e: FormEvent<HTMLFormElement>) => {
-            e.preventDefault();
-            OnSubmit();
-          }}
-        >
-          <h2 className="text-4xl font-semibold mb-5">Register</h2>
-          <div>
-            <p>Name</p>
-            <input
-              {...register("name", { required: true })}
-              className="border w-full p-2 border-gray-300"
-              type="text"
-              placeholder="Enter Name"
-            />
-          </div>
-          <div>
-            <p>Email</p>
-            <input
-              {...register("email", { required: true })}
-              className="border w-full p-2 border-gray-300"
-              type="email"
-              placeholder="Enter Email"
-            />
-          </div>
-          <div>
-            <p>Password</p>
-            <div className="flex flex-row items-center gap-3 border-gray-300 border">
-              <input
-                {...register("password", { required: true })}
-                className="w-[90%] p-2"
-                type={isPasswordVisible ? "text" : "password"}
-                placeholder="Enter password"
-              />
-              <span
-                onClick={() => setIsPassWordVisible((prev: boolean) => !prev)}
-              >
-                {isPasswordVisible ? (
-                  <FaRegEyeSlash className="cursor-pointer" />
-                ) : (
-                  <FaRegEye className="cursor-pointer" />
-                )}
-              </span>
+    <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-[#f7fdfc] to-[#e0f2fe]">
+      <div className="flex flex-col md:flex-row items-center gap-12 bg-white shadow-xl rounded-2xl p-10 max-w-4xl w-full">
+        {/* Form Section */}
+        <div className="flex-1 w-full">
+          <form
+            onSubmit={(e: FormEvent<HTMLFormElement>) => {
+              e.preventDefault();
+              OnSubmit();
+            }}
+            className="flex flex-col gap-6"
+          >
+            <div>
+              <h2 className="text-4xl font-bold text-orange-500 mb-2">
+                Create Account
+              </h2>
+              <p className="text-gray-600">Sign up for hostel booking access</p>
             </div>
-          </div>
-          <button type="submit" className="lightGreen-button mt-3 !w-max">
-            Register
-          </button>
-          <p>
-            Already have an account ?{" "}
-            <Link href={"/login"} className="hover:text-primary">
-              Login
-            </Link>
-          </p>
-        </form>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Full Name
+              </label>
+              <input
+                {...register("name", { required: true })}
+                className="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                type="text"
+                placeholder="John Doe"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email
+              </label>
+              <input
+                {...register("email", { required: true })}
+                className="w-full px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                type="email"
+                placeholder="you@example.com"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Password
+              </label>
+              <div className="flex items-center border rounded-md shadow-sm px-4">
+                <input
+                  {...register("password", { required: true })}
+                  type={isPasswordVisible ? "text" : "password"}
+                  className="w-full py-2 focus:outline-none"
+                  placeholder="Create a strong password"
+                />
+                <span
+                  onClick={() => setIsPassWordVisible((prev) => !prev)}
+                  className="text-gray-500 cursor-pointer ml-2"
+                >
+                  {isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
+                </span>
+              </div>
+            </div>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`bg-orange-500 text-white py-2 px-6 rounded-md hover:bg-primary-dark transition duration-200 ${
+                isLoading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            >
+              {isLoading ? "Registering..." : "Register"}
+            </button>
+            <p className="text-sm text-gray-600">
+              Already have an account?{" "}
+              <Link
+                href="/login"
+                className="text-orange-500 font-medium hover:underline"
+              >
+                Login here
+              </Link>
+            </p>
+          </form>
+        </div>
+
+        {/* Image Section */}
+        <div className="flex-1 hidden md:block">
+          <img
+            src="/images/login3D.jpg"
+            alt="Register Illustration"
+            className="rounded-lg object-cover w-full h-full"
+          />
+        </div>
+
+        <Toaster />
       </div>
-      <div className="w-[350px] h-full overflow-hidden">
-        <img alt="login-img" src="/images/login3D.jpg" />
-      </div>
-      <Toaster />
     </div>
   );
 };

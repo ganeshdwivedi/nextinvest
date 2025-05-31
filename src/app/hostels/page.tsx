@@ -12,10 +12,10 @@ const page = () => {
   const getAllInvestments = async () => {
     try {
       const response = await axios.get("/api/investments");
-      setAllInvestments(response.data.data||[]);
+      setAllInvestments(response.data.data || []);
     } catch (error) {
       setAllInvestments([]);
-      console.log(error,'error in getallInvetmnets');
+      console.log(error, "error in getallInvetmnets");
     }
   };
   useEffect(() => {
@@ -26,13 +26,13 @@ const page = () => {
     <div className="px-52 py-24">
       <div className="flex flex-row justify-end mb-10">
         <button
-          className="primary-button"
+          className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg text-base font-medium flex flex-row items-center gap-1"
           onClick={() => {
             setISOpen(true);
             setSelectedInvest({});
           }}
         >
-          Add Investments +
+          Add Hostel +
         </button>
       </div>
       <Slide cascade={true} direction="up">
@@ -51,12 +51,13 @@ const page = () => {
               />
             ))
           ) : (
-            <div>
-              <h2 className="text-5xl font-medium">
-                No Investment cards found
+            <div className="col-span-full text-center mt-10">
+              <h2 className="text-3xl font-semibold text-gray-700">
+                No Hostels Found
               </h2>
-              <p className="font-regular text-gray-600">
-                you can add investemnt cards.
+              <p className="text-gray-500 mt-2">
+                If you're an admin, you can add new hostel listings from the
+                dashboard.
               </p>
             </div>
           )}

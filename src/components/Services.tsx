@@ -2,7 +2,7 @@ import { Card } from "@nextui-org/react";
 import Image from "next/image";
 import React from "react";
 import { BiCalendar, BiCreditCard, BiMapPin, BiPhone } from "react-icons/bi";
-import { CiMapPin } from "react-icons/ci";
+import { CiHeart, CiMapPin } from "react-icons/ci";
 import { FaBed, FaDollarSign, FaUserSecret } from "react-icons/fa6";
 import { WiFire } from "react-icons/wi";
 
@@ -17,7 +17,7 @@ function Services() {
               AMENITIES
             </p>
             <h2 className="text-3xl lg:text-5xl font-bold text-slate-800">
-              Why Choose Our Hotels
+              Why Choose Our Hostels
             </h2>
           </div>
 
@@ -51,7 +51,10 @@ function Services() {
             </div>
 
             {/* Easy Booking */}
-            <div className="text-center group hover:shadow-lg transition-shadow duration-300 p-6 rounded-lg">
+            <div
+              id="#how"
+              className="text-center group hover:shadow-lg transition-shadow duration-300 p-6 rounded-lg"
+            >
               <div className="w-16 h-16 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:bg-orange-200 transition-colors">
                 <BiCreditCard className="w-8 h-8 text-orange-500" />
               </div>
@@ -78,14 +81,14 @@ function Services() {
           </div>
         </section>
 
-        {/* Featured Hotels Section */}
+        {/* Featured Hostels Section */}
         <section className="mb-20 lg:mb-32">
           <div className="text-center mb-12 lg:mb-16">
             <p className="text-slate-500 text-sm lg:text-base font-medium mb-2">
               Most Booked
             </p>
             <h2 className="text-3xl lg:text-5xl font-bold text-slate-800">
-              Featured Hotels
+              Featured Hostels
             </h2>
           </div>
 
@@ -93,10 +96,9 @@ function Services() {
             {/* Luxury Suite, Mumbai */}
             <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 border-0 shadow-lg">
               <div className="relative h-64">
-                <Image
-                  src="/placeholder.svg?height=256&width=400"
+                <img
+                  src="https://images.unsplash.com/photo-1721742736282-06b1eb4cbe50?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Luxury Suite in Mumbai"
-                  fill
                   className="object-cover"
                 />
               </div>
@@ -109,13 +111,13 @@ function Services() {
                     <p className="text-orange-600 text-lg font-bold">
                       ₹2,500
                       <span className="text-sm text-slate-600 font-normal">
-                        /night
+                        /per month
                       </span>
                     </p>
                   </div>
                   <div className="flex items-center gap-1">
                     {/* <Star className="w-4 h-4 text-yellow-400 fill-current" /> */}
-                    iconnnn-------
+                    <CiHeart className="text-orange-500 text-2xl" />
                     <span className="text-sm font-medium">4.8</span>
                   </div>
                 </div>
@@ -129,10 +131,9 @@ function Services() {
             {/* Deluxe Room, Delhi */}
             <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 border-0 shadow-lg">
               <div className="relative h-64">
-                <Image
-                  src="/placeholder.svg?height=256&width=400"
+                <img
+                  src="https://images.unsplash.com/photo-1619810230359-b2c2f61c49cd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Deluxe Room in Delhi"
-                  fill
                   className="object-cover"
                 />
               </div>
@@ -145,13 +146,13 @@ function Services() {
                     <p className="text-orange-600 text-lg font-bold">
                       ₹1,800
                       <span className="text-sm text-slate-600 font-normal">
-                        /night
+                        /per month
                       </span>
                     </p>
                   </div>
                   <div className="flex items-center gap-1">
                     {/* <Star className="w-4 h-4 text-yellow-400 fill-current" /> */}
-                    iconnnn-------
+                    <CiHeart className="text-orange-500 text-2xl" />
                     <span className="text-sm font-medium">4.6</span>
                   </div>
                 </div>
@@ -165,10 +166,9 @@ function Services() {
             {/* Premium Room, Bangalore */}
             <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 border-0 shadow-lg">
               <div className="relative h-64">
-                <Image
-                  src="/placeholder.svg?height=256&width=400"
+                <img
+                  src="https://zolostays.com/blog/wp-content/uploads/2023/12/Should-I-go-to-hostel-in-college_.jpg"
                   alt="Premium Room in Bangalore"
-                  fill
                   className="object-cover"
                 />
               </div>
@@ -181,12 +181,12 @@ function Services() {
                     <p className="text-orange-600 text-lg font-bold">
                       ₹2,200
                       <span className="text-sm text-slate-600 font-normal">
-                        /night
+                        /per month
                       </span>
                     </p>
                   </div>
                   <div className="flex items-center gap-1">
-                    iconnnn-------
+                    <CiHeart className="text-orange-500 text-2xl" />
                     {/* <Star className="w-4 h-4 text-yellow-400 fill-current" /> */}
                     <span className="text-sm font-medium">4.7</span>
                   </div>
@@ -222,7 +222,7 @@ function Services() {
                   </div>
                   <div>
                     <h3 className="text-slate-800 font-semibold mb-1">
-                      Search Hotels
+                      Search Hostels
                     </h3>
                     <p className="text-slate-600 text-sm">
                       Enter your destination, check-in and check-out dates, and
@@ -257,7 +257,7 @@ function Services() {
                       Check-in
                     </h3>
                     <p className="text-slate-600 text-sm">
-                      Show your booking confirmation at the hotel reception and
+                      Show your booking confirmation at the hostel reception and
                       enjoy your stay.
                     </p>
                   </div>
@@ -270,21 +270,21 @@ function Services() {
               <div className="overflow-hidden shadow-xl border-0 max-w-sm mx-auto lg:mx-0">
                 <div className="relative h-48">
                   <Image
-                    src="/placeholder.svg?height=192&width=320"
-                    alt="Hotel Room Booking"
+                    src="/images/Rectangle 17.jpg"
+                    alt="Hostel Room Booking"
                     fill
                     className="object-cover"
                   />
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-semibold text-slate-800 mb-4">
-                    Hotel Booking
+                    Hostel Booking
                   </h3>
 
                   <div className="space-y-3 mb-6">
                     <div className="flex items-center text-slate-600 text-sm">
                       <BiCalendar className="w-4 h-4 mr-2" />
-                      <span>15-18 Dec | 3 Nights</span>
+                      <span>15-18 Dec | 3 per months</span>
                     </div>
                     <div className="flex items-center text-slate-600 text-sm">
                       <FaUserSecret className="w-4 h-4 mr-2" />
@@ -309,7 +309,7 @@ function Services() {
                     </div>
                     <div className="flex items-center gap-1">
                       <span className="text-slate-600 text-sm">4.8</span>
-                      iconnnn-------
+                      <CiHeart className="text-orange-500 text-2xl" />
                       {/* <Star className="w-4 h-4 text-yellow-400 fill-current" /> */}
                     </div>
                   </div>

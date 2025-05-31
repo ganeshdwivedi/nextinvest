@@ -16,8 +16,8 @@ export default function Home() {
       <Services />
       <Offerings />
       {/* <InvestmentCard /> */}
-      <PaidInvestor />
-      <RaiseCapital />
+      {/* <PaidInvestor /> */}
+      {/* <RaiseCapital /> */}
       <Toaster />
     </>
   );
