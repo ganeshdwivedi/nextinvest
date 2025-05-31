@@ -53,7 +53,7 @@ const AuthRoutes = [
     title: "All hostels",
     icon: false,
     type: "no",
-    to: "/hotels",
+    to: "/hostels",
   },
   {
     title: "Logout",

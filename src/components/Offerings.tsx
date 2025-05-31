@@ -39,7 +39,7 @@ const Offerings = () => {
       />
 
       {/* Hostels Grid */}
-      {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
         {allInvestments?.length > 0 ? (
           allInvestments.map((hostel: any, index: number) => (
             <InvestmentCard data={hostel} key={index} />
@@ -55,7 +55,7 @@ const Offerings = () => {
             </p>
           </div>
         )}
-      </div> */}
+      </div>
     </div>
   );
 };
