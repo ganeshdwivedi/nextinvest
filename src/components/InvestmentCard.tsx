@@ -56,10 +56,11 @@ const InvestmentCard = ({
             <h3 className="text-lg font-semibold text-slate-800">
               {data.title}
             </h3>
+            <h3 className="text-slate-800">{data.description}</h3>
             <p className="text-orange-600 text-lg font-bold">
               ₹{Number(data.total_price).toLocaleString()}
               <span className="text-sm text-slate-600 font-normal ml-1">
-                /total
+                /per month
               </span>
             </p>
           </div>

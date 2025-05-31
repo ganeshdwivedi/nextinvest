@@ -129,7 +129,7 @@ const Footer = () => {
             href="https://drive.google.com/file/d/1qIOTE_0Alf4v-KbUHmgWHtSWlAfMjhk-/view?usp=sharing"
             className="cursor-pointer font-medium hover:text-primary"
           >
-            Ganesh Dwivedi
+            TrioCode
           </a>
         </div>
         <div className="flex flex-row items-center gap-5">
